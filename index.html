@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>දරුවාගේ අධ්‍යාපන තත්ත්වය පරීක්ෂා කිරීමේ උපකරණය</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        
+        .section {
+            margin-bottom: 30px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+        }
+        
+        .question {
+            margin-bottom: 15px;
+            padding: 10px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        
+        .options {
+            display: flex;
+            gap: 10px;
+            margin-top: 8px;
+        }
+        
+        .option {
+            padding: 5px 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .option:hover {
+            background-color: #e9f5ff;
+        }
+        
+        .option.selected {
+            background-color: #3498db;
+            color: white;
+            border-color: #2980b9;
+        }
+        
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-right: 10px;
+            transition: background-color 0.3s;
+        }
+        
+        button:hover {
+            background-color: #2980b9;
+        }
+        
+        #report {
+            display: none;
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            border-left: 5px solid #3498db;
+        }
+        
+        .report-section {
+            margin-bottom: 15px;
+        }
+        
+        .report-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .score-display {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        .progressbar {
+            width: 100%;
+            background-color: #e0e0e0;
+            border-radius: 10px;
+            margin: 10px 0;
+        }
+        
+        .progress {
+            height: 12px;
+            border-radius: 10px;
+            background-color: #3498db;
+        }
+        
+        .recommendation {
+            background-color: #e8f4fc;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        
+        @media (max-width: 600px) {
+            .options {
+                flex-direction: column;
+                gap: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>ඔබේ දරුවාගේ අධ්‍යාපන තත්ත්වය කෙබඳු ද?</h1>
+		<h2>වයස අවුරුදු 15-18 අතර දරුවන් සඳහා සකස් කළ යෙදවුමකි</h2>
+		<h3>මෙය දළ නිගමනයකට පැමිණීමට උපකාරයක් පමණක් වන අතර වාර්තාව සැකසෙන්නේ ඔබ සපයනු ලබන දත්ත මත ය. තව ද මෙහි වාර්තාව මත පමණක් පදනම්ව දරුවා මත පීඩනයන් හෝ වෙනත් තත්ත්වයන් ඇති කිරීමෙන් වළකින්න.</h3>
+        
+        <div class="section">
+            <p>මෙම උපකරණය මගින් ඔබේ දරුවාගේ අධ්‍යාපන තත්ත්වය සහ ඔබ දරුවාගේ අධ්‍යාපනයට දක්වන සහභාගීත්වය මැනීමට උත්සාහ කරයි. පහත ප්‍රශ්නවලට පිළිතුරු සැපයීමෙන් පසු ලැබෙන වාර්තාව මගින් ඔබේ දරුවාගේ අධ්‍යාපන දියුණුව සඳහා අවශ්‍ය දිශානතිය සොයාගත හැකිය.</p>
+            <p><strong>උපදෙස්:</strong> සෑම ප්‍රශ්නයකටම පහත ආකාරයට පිළිතුරු සපයන්න:</p>
+            <ul>
+                <li><strong>0</strong> - අදාළ නොවේ හෝ නිවැරදි නොවේ</li>
+                <li><strong>1</strong> - යම් තරමකට අදාළ හෝ නිවැරදි</li>
+                <li><strong>2</strong> - වඩාත් අදාළ හෝ නිවැරදි</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>1. ඔබ දකින ඔබේ ඔබගේ පුතා/දුව</h2>
+            
+            <div class="question">
+                <p>1. පුතා/දුව නිතිපතා නියමිත වේලාවට පාසල් යාමට සූදානම් වෙයි.</p>
+                <div class="options" data-question="1">
+                    <div class="option" data-value="0">0</div>
+                    <div class="option" data-value="1">1</div>
+                    <div class="option" data-value="2">2</div>
+                </div>
+            </div>
+            
+            <div class="question">
+                <p>2. පුතා/දුව ගෙදර පැවරුම් නිසි ලෙස සම්පූර්ණ කරයි.</p>
+                <div class="options" data-question="2">
+                    <div class="option" data-value="0">0</div>
+                    <div class="option" data-value="1">1</div>
+                    <div class="option" data-value="2">2</div>
+                </div>
+            </div>
+            
+            <div class="question">
+                <p>3. පුතා/දුව විභාග ප්‍රතිඵල ඔබ සමඟ සාකච්ඡා කරයි.</p>
+                <div class="options" data-question="3">
+                    <div class="option" data-value="0">0</div>
+                    <div class="option" data-value="1">1</div>
+                    <div class="option" data-value="2">2</div>
+                </div>
+            </div>
+            
+            <div class="question">
+                <p>4. පුතාට/දුවට අමතර පොත්පත් කියවීමේ පුරුද්දක් ඇත.</p>
+                <div class="options" data-question="4">
+                    <div class="option" data-value="0">0</div>
+                    <div class="option" data-value="1">1</div>
+                    <div class="option" data-value="2">2</div>
+                </div>
+            </div>
+            
+            <div class="question">
+                <p>5. පුතා/දුව පන්ති සටහන් ක්‍රමානුකූලව සකස් කරගෙන යයි.</p>
+                <div class="options" data-question="5">
+                    <div class="option" data-value="0">0</div>
+                    <div class="option" data-value="1">1</div>
+                    <div class="option" data-value="2">2</div>
+                </div>
+            </div>
+            
+            <div class="question">
+                <p>6. පුතා/දුව ඔහුගේ/ඇයගේ අධ්‍යාපන අරමුණු සහ ඉලක්ක පිළිබඳව සැලසුම් කර ඇත.</p>
+                <div class="options" data-question="6">
+                    <div class="option" data-value="0">0</div>
+                    <div class="option" data-value="1">1</div>
+                    <div class="option" data-value="2">2</div>
+                </div>
+            </div>
+            
+            <div class="question">
+                <p>7. පුතා/දුව තමන්ගේ අධ්‍යාපන දුර්වලතා පිළිබඳව දැනුවත්ව සිටී.</p>
+                <div class="options" data-question="7">
+                    <div class="option" data-value="0">0</div>
+                    <div class="option" data-value="1">1</div>
+                    <div class="option" data-value="2">2</div>
+                </div>
+            </div>
+            
+            <div class="question">
+                <p>8. පුතා/දුව සිය අධ්‍යාපන කටයුතු සඳහා කාලය කළමනාකරණය කරගෙන යයි.</p>
+                <div class="options" data-question="8">
+                    <div class="option" data-value="0">0</div>
+                    <div class="option" data-value="1">1</div>
+                    <div class="option" data-value="2">2</div>
+                </div>
+            </div>
+            
+            <div class="question">
+                <p>9. පුතා/දුව පංති කාමරයේ කටයුතු සඳහා සක්‍රියව සහභාගී වන බව පෙනී යයි.</p>
+                <div class="options" data-question="9">
+                    <div class="option" data-value="0">0</div>
+                    <div class="option" data-value="1">1</div>
+                    <div class="option" data-value="2">2</div>
+                </div>
+            </div>
+            
+            <div class="question">
+                <p>10. පුතා/දුව තමන්ගේ ගුරුවරුන් සමඟ හොඳ සම්බන්ධතාවයක් පවත්වාගෙන යයි.</p>
+                <div class="options" data-question="10">
+                    <div class="option" data-value="0">0</div>
+                    <div class="option" data-value="1">1</div>
+                    <div class="option" data-value="2">2</div>
+                </div>
+            </div>
+            
+            <div class="question">
+                <p>11. පුතා/දුව තමන්ගේ අධ්‍යාපන ප්‍රගතිය පිළිබඳව සතුටින් කතා කරයි.</p>
+                <div class="options" data-question="11">
+                    <div class="option" data-value="0">0</div>
+                    <div class="option" data-value="1">1</div>
+                    <div class="option" data-value="2">2</div>
+                </div>
+            </div>
+            
+            <div class="question">
+                <p>12. පුතා/දුව හදාරන විෂයයන් සම්බන්ධ ගැටළු විසඳාගැනීමට උනන්දුවක් දක්වයි.</p>
+                <div class="options" data-question="12">
+                    <div class="option" data-value="0">0</div>
+                    <div class="option" data-value="1">1</div>
+                    <div class="option" data-value="2">2</div>
+                </div>
+            </div>
+            
+            <div class="question">
+                <p>13. පුතා/දුව තමන්ගේ විෂය සීමාවන් ඉක්මවා අමතර දැනුම සොයා යයි.</p>
+                <div class="options" data-question="13">
+                    <div class="option" data-value="0">0</div>
+                    <div class="option" data-value="1">1</div>
+                    <div class="option" data-value="2">2</div>
+                </div>
+            </div>
+            
+            <div class="question">
+                <p>14. පුතා/දුව අන් අය සමඟ සහයෝගයෙන් කණ්ඩායම් ක්‍රියාකාරකම්වල යෙදෙයි.</p>
+                <div class="options" data-question="14">
+                    <div class="option" data-value="0">0</div>
+                    <div class="option" data-value="1">1</div>
+                    <div class="option" data-value="2">2</div>
+                </div>
+            </div>
+            
+            <div class="question">
+                <p>15. පුතා/දුව තමන්ගේ ඉගෙනීමේ ශෛලියක් නිර්මාණය කරගෙන ඇත.</p>
+                <div class="options" data-question="15">
+                    <div class="option" data-value="0">0</div>
+                    <div class="option" data-value="1">1</div>
+                    <div class="option" data-value="2">2</div>
+                </div>
+            </div>
+            
+            <div class="question">
+                <p>16. පුතා/දුව අඩු ලකුණු ලැබූ විට ඒවා වැඩිදියුණු කිරීමට උත්සාහ කරයි.</p>
+                <div class="options" data-question="16">
+                    <div class="option" data-value="0">0</div>
+                    <div class="option" data-value="1">1</div>
+                    <div class="option" data-value="2">2</div>
+                </div>
+            </div>
+            
+            <div class="question">
+                <p>17. පුතා/දුව උසස් අධ්‍යාපනය පිළිබඳව උනන්දුවක් දක්වයි. ඒ පිළිබඳ තොරතුරු ගවේෂණය කරයි.</p>
+                <div class="options" data-question="17">
+                    <div class="option" data-value="0">0</div>
+                    <div class="option" data-value="1">1</div>
+                    <div class="option" data-value="2">2</div>
+                </div>
+            </div>
+            
+            <div class="question">
+                <p>18. පුතා/දුව මුහුණ දීමට නියමිත විභාග සඳහා පූර්ව සැලසුම් සකස් කරයි.</p>
+                <div class="options" data-question="18">
+                    <div class="option" data-value="0">0</div>
+                    <div class="option" data-value="1">1</div>
+                    <div class="option" data-value="2">2</div>
+                </div>
+            </div>
+            
+            <div class="question">
+                <p>19. පුතා/දුව නිර්මාණශීලී සිතීමේ හැකියාව පෙන්වයි.</p>
+                <div class="options" data-question="19">
+                    <div class="option" data-value="0">0</div>
+                    <div class="option" data-value="1">1</div>
+                    <div class="option" data-value="2">2</div>
+                </div>
+            </div>
+            
+            <div class="question">
+                <p>20. පුතා/දුව පාසල් අතිරේක ක්‍රියාකාරකම්වල නිරත වෙයි.</p>
+                <div class="options" data-question="20">
+                    <div class="option" data-value="0">0</div>
+                    <div class="option" data-value="1">1</div>
+                    <div class="option" data-value="2">2</div>
+                </div>
+            </div>
+            
+            <div class="question">
+                <p>21. පුතා/දුව පන්තියේ ප්‍රශ්න අසන්නට පසුබට නොවන බව පෙනෙයි.</p>
+                <div class="options" data-question="21">
+                    <div class="option" data-value="0">0</div>
+                    <div class="option" data-value="1">1</div>
+                    <div class="option" data-value="2">2</div>
+                </div>
+            </div>
+            
+            <div class="question">
+                <p>22. පුතා/දුව විද්‍යුත් මාධ්‍ය (ඉන්ටර්නෙට්, අධ්‍යාපනික ඇප්) අධ්‍යාපනය සඳහා යොදා ගනී.</p>
+                <div class="options" data-question="22">
+                    <div class="option" data-value="0">0</div>
+                    <div class="option" data-value="1">1</div>
+                    <div class="option" data-value="2">2</div>
+                </div>
+            </div>
+            
+            <div class="question">
+                <p>23. පුතා/දුව අධ්‍යාපනික අභියෝගවල දී නම්‍යශීලීව සහ ඉවසීමෙන් යුතුව කටයුතු කරයි.</p>
+                <div class="options" data-question="23">
+                    <div class="option" data-value="0">0</div>
+                    <div class="option" data-value="1">1</div>
+                    <div class="option" data-value="2">2</div>
+                </div>
+            </div>
+            
+            <div class="question">
+                <p>24. පුතා/දුව තම අධ්‍යාපන ප්‍රගතිය සම්බන්ධයෙන් ස්වයං-ඇගයීමක් කර ගනියි.</p>
+                <div class="options" data-question="24">
+                    <div class="option" data-value="0">0</div>
+                    <div class="option" data-value="1">1</div>
+                    <div class="option" data-value="2">2</div>
+                </div>
+            </div>
+            
+            <div class="question">
+                <p>25. පුතා/දුව තමන්ගේ අනාගත වෘත්තීය මාර්ගය සම්බන්ධයෙන් සැලසුම් කරයි.</p>
+                <div class="options" data-question="25">
+                    <div class="option" data-value="0">0</div>
+                    <div class="option" data-value="1">1</div>
+                    <div class="option" data-value="2">2</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>2. දරුවාගේ ඉගෙනීමට ඔබගේ දායකත්වය</h2>
+            
+            <div class="question">
+                <p>26. මම දරුවාගේ පාසල් ප්‍රගතිය නිතිපතා සොයා බලමි.</p>
+                <div class="options" data-question="26">
+                    <div class="option" data-value="0">0</div>
+                    <div class="option" data-value="1">1</div>
+                    <div class="option" data-value="2">2</div>
+                </div>
+            </div>
+            
+            <div class="question">
+                <p>27. මම දරුවාගේ ගෙදර පැවරුම් කිරීමට උදව් කරමි.</p>
+                <div class="options" data-question="27">
+                    <div class="option" data-value="0">0</div>
+                    <div class="option" data-value="1">1</div>
+                    <div class="option" data-value="2">2</div>
+                </div>
+            </div>
+            
+            <div class="question">
+                <p>28. මම පාසල් රැස්වීම් සහ දෙමාපිය-ගුරු හමුවලට සහභාගී වෙමි.</p>
+                <div class="options" data-question="28">
+                    <div class="option" data-value="0">0</div>
+                    <div class="option" data-value="1">1</div>
+                    <div class="option" data-value="2">2</div>
+                </div>
+            </div>
+            
+            <div class="question">
+                <p>29. රූපවාහිනී නැරඹීමට මාගේ ඇති කැමැත්ත වැනි ක්‍රියා පාලනය කරමින්/ කළමනාකරණය කරගනිමින් මම දරුවාගේ විභාග සූදානම සඳහා සහය වෙමි.</p>
+                <div class="options" data-question="29">
+                    <div class="option" data-value="0">0</div>
+                    <div class="option" data-value="1">1</div>
+                    <div class="option" data-value="2">2</div>
+                </div>
+            </div>
+            
+            <div class="question">
+                <p>30. මම දරුවාගේ අධ්‍යාපනික ගැටළු විසඳීමට ළෙංගතු බවින් යුතුව හා සමීපව සහය වෙමි.</p>
+                <div class="options" data-question="30">
+                    <div class="option" data-value="0">0</div>
+                    <div class="option" data-value="1">1</div>
+                    <div class="option" data-value="2">2</div>
+                </div>
+            </div>
+            
+            <div class="question">
+                <p>31. අවශ්‍යතා ඇති ඕනෑම විටෙක මම දරුවාගේ ගුරුවරුන් සමඟ සන්නිවේදනය කරමි.</p>
+                <div class="options" data-question="31">
+                    <div class="option" data-value="0">0</div>
+                    <div class="option" data-value="1">1</div>
+                    <div class="option" data-value="2">2</div>
+                </div>
+            </div>
+            
+            <div class="question">
+                <p>32. මම රාත්‍රීයේ දී හෝ විවේක ඇති වේලාවට දරුවා සමඟ පාසලේ අද දිනය පිළිබඳව සාකච්ඡා කරමි.</p>
+                <div class="options" data-question="32">
+                    <div class="option" data-value="0">0</div>
+                    <div class="option" data-value="1">1</div>
+                    <div class="option" data-value="2">2</div>
+                </div>
+            </div>
+            
+            <div class="question">
+                <p>33. මම දරුවාගේ අධ්‍යාපනයට අවශ්‍ය පහසුකම් සපයමි.</p>
+                <div class="options" data-question="33">
+                    <div class="option" data-value="0">0</div>
+                    <div class="option" data-value="1">1</div>
+                    <div class="option" data-value="2">2</div>
+                </div>
+            </div>
+            
+            <div class="question">
+                <p>34. මම දරුවා සමඟ අනාගත අධ්‍යාපනික ඉලක්ක පිළිබඳව සාකච්ඡා කරමි.</p>
+                <div class="options" data-question="34">
+                    <div class="option" data-value="0">0</div>
+                    <div class="option" data-value="1">1</div>
+                    <div class="option" data-value="2">2</div>
+                </div>
+            </div>
+            
+            <div class="question">
+                <p>35. මම දරුවාගේ අධ්‍යාපනික ජයග්‍රහණ සමරමි.</p>
+                <div class="options" data-question="35">
+                    <div class="option" data-value="0">0</div>
+                    <div class="option" data-value="1">1</div>
+                    <div class="option" data-value="2">2</div>
+                </div>
+            </div>
+            
+            <div class="question">
+                <p>36. මම දරුවාට අධ්‍යාපනික සම්පත් (පොත්, පුස්තකාල, අධ්‍යාපනික වීඩියෝ) ලබා දෙමි.</p>
+                <div class="options" data-question="36">
+                    <div class="option" data-value="0">0</div>
+                    <div class="option" data-value="1">1</div>
+                    <div class="option" data-value="2">2</div>
+                </div>
+            </div>
+            
+            <div class="question">
+                <p>37. මට දරුවාගේ ඉගෙනුම් ශෛලිය පිළිබඳ අවබෝධයක් ඇත.</p>
+                <div class="options" data-question="37">
+                    <div class="option" data-value="0">0</div>
+                    <div class="option" data-value="1">1</div>
+                    <div class="option" data-value="2">2</div>
+                </div>
+            </div>
+            
+            <div class="question">
+                <p>38. මම දරුවාගේ නිවැරදි අධ්‍යාපන දිශානතිය වෙනුවෙන් උපදෙස් ලබා දෙමි.</p>
+                <div class="options" data-question="38">
+                    <div class="option" data-value="0">0</div>
+                    <div class="option" data-value="1">1</div>
+                    <div class="option" data-value="2">2</div>
+                </div>
+            </div>
+            
+            <div class="question">
+                <p>39. මම දරුවාගේ වෘත්තීය අනාගතය පිළිබඳව සාකච්ඡා කරමි.</p>
+                <div class="options" data-question="39">
+                    <div class="option" data-value="0">0</div>
+                    <div class="option" data-value="1">1</div>
+                    <div class="option" data-value="2">2</div>
+                </div>
+            </div>
+            
+            <div class="question">
+                <p>40. මම දරුවාගේ අතිරේක පන්ති සඳහා සහාය වෙමි.</p>
+                <div class="options" data-question="40">
+                    <div class="option" data-value="0">0</div>
+                    <div class="option" data-value="1">1</div>
+                    <div class="option" data-value="2">2</div>
+                </div>
+            </div>
+            
+            <div class="question">
+                <p>41. මම දරුවාගේ අධ්‍යාපනයට අවශ්‍ය කාලය ලබා දෙමි.</p>
+                <div class="options" data-question="41">
+                    <div class="option" data-value="0">0</div>
+                    <div class="option" data-value="1">1</div>
+                    <div class="option" data-value="2">2</div>
+                </div>
+				</div>
+            
+            <div class="question">
+                <p>42. මම දරුවාගේ අධ්‍යාපන කටයුතු සඳහා නිවසේ සුදුසු පරිසරයක් සකස් කර ඇත.</p>
+                <div class="options" data-question="42">
+                    <div class="option" data-value="0">0</div>
+                    <div class="option" data-value="1">1</div>
+                    <div class="option" data-value="2">2</div>
+                </div>
+            </div>
+            
+            <div class="question">
+                <p>43. මම දරුවාගේ අධ්‍යාපන ප්‍රගතිය වාර්තා කිරීමට නිසි ක්‍රමවේදයක් පවත්වාගෙන යමි.</p>
+                <div class="options" data-question="43">
+                    <div class="option" data-value="0">0</div>
+                    <div class="option" data-value="1">1</div>
+                    <div class="option" data-value="2">2</div>
+                </div>
+            </div>
+            
+            <div class="question">
+                <p>44. මම දරුවාගේ අධ්‍යාපනය සම්බන්ධ ගුරුවරුන්ගේ ප්‍රතිපෝෂණවලට සවන් දෙමි.</p>
+                <div class="options" data-question="44">
+                    <div class="option" data-value="0">0</div>
+                    <div class="option" data-value="1">1</div>
+                    <div class="option" data-value="2">2</div>
+                </div>
+            </div>
+            
+            <div class="question">
+                <p>45. මම දරුවාට අධ්‍යාපනික තීරණ ගැනීමේදී නිසි මග පෙන්වීම් ලබා දෙමි.</p>
+                <div class="options" data-question="45">
+                    <div class="option" data-value="0">0</div>
+                    <div class="option" data-value="1">1</div>
+                    <div class="option" data-value="2">2</div>
+                </div>
+            </div>
+            
+            <div class="question">
+                <p>46. මම දරුවාගේ විශේෂ හැකියා හඳුනාගෙන ඒවා දියුණු කිරීමට උදව් කරමි.</p>
+                <div class="options" data-question="46">
+                    <div class="option" data-value="0">0</div>
+                    <div class="option" data-value="1">1</div>
+                    <div class="option" data-value="2">2</div>
+                </div>
+            </div>
+            
+            <div class="question">
+                <p>47. මම දරුවාට පොත් කියවීමේ පුරුද්ද ඇති කිරීමට උත්සාහ කරමි.</p>
+                <div class="options" data-question="47">
+                    <div class="option" data-value="0">0</div>
+                    <div class="option" data-value="1">1</div>
+                    <div class="option" data-value="2">2</div>
+                </div>
+            </div>
+            
+            <div class="question">
+                <p>48. මම දරුවාගේ තාක්ෂණික මාධ්‍ය භාවිතය අධීක්ෂණය කරමි.</p>
+                <div class="options" data-question="48">
+                    <div class="option" data-value="0">0</div>
+                    <div class="option" data-value="1">1</div>
+                    <div class="option" data-value="2">2</div>
+                </div>
+            </div>
+            
+            <div class="question">
+                <p>49. මම දරුවාගේ අධ්‍යාපන දුෂ්කරතා හා පෞද්ගලික අභියෝග වල දී ඔහුට/ඇයට ළෙංගතුව, සමීපව මානසික සහයෝගය ලබා දෙමි.</p>
+                <div class="options" data-question="49">
+                    <div class="option" data-value="0">0</div>
+                    <div class="option" data-value="1">1</div>
+                    <div class="option" data-value="2">2</div>
+                </div>
+            </div>
+            
+            <div class="question">
+                <p>50. මම දරුවා සමඟ අධ්‍යාපනයේ වටිනාකම පිළිබඳව කතා කරමි.</p>
+                <div class="options" data-question="50">
+                    <div class="option" data-value="0">0</div>
+                    <div class="option" data-value="1">1</div>
+                    <div class="option" data-value="2">2</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <button id="calculate">ඇගයීම ගණනය කරන්න</button>
+            <button id="copyReport" style="display: none;">වාර්තාව පිටපත් කරන්න</button>
+        </div>
+        
+        <div id="report"></div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const options = document.querySelectorAll('.option');
+            const calculateButton = document.getElementById('calculate');
+            const copyReportButton = document.getElementById('copyReport');
+            const reportDiv = document.getElementById('report');
+            
+            // Click event for options
+            options.forEach(option => {
+                option.addEventListener('click', function() {
+                    const questionOptions = this.parentElement.querySelectorAll('.option');
+                    questionOptions.forEach(opt => opt.classList.remove('selected'));
+                    this.classList.add('selected');
+                });
+            });
+            
+            // Calculate button click event
+            calculateButton.addEventListener('click', function() {
+                const answers = {};
+                const questionContainers = document.querySelectorAll('.options');
+                let unansweredQuestions = [];
+                
+                questionContainers.forEach(container => {
+                    const questionNum = container.dataset.question;
+                    const selectedOption = container.querySelector('.selected');
+                    
+                    if (selectedOption) {
+                        answers[questionNum] = parseInt(selectedOption.dataset.value);
+                    } else {
+                        unansweredQuestions.push(questionNum);
+                    }
+                });
+                
+                if (unansweredQuestions.length > 0) {
+                    alert(`කරුණාකර පහත ප්‍රශ්න සඳහා පිළිතුරු සපයන්න: ${unansweredQuestions.join(', ')}`);
+                    return;
+                }
+                
+                // Calculate scores
+                let studentScore = 0;
+                let parentScore = 0;
+                
+                for (let i = 1; i <= 25; i++) {
+                    studentScore += answers[i];
+                }
+                
+                for (let i = 26; i <= 50; i++) {
+                    parentScore += answers[i];
+                }
+                
+                const totalScore = studentScore + parentScore;
+                const studentPercentage = (studentScore / 50) * 100;
+                const parentPercentage = (parentScore / 50) * 100;
+                const totalPercentage = (totalScore / 100) * 100;
+                
+                // Generate report
+                let report = `
+                    <h2>ඇගයීම් වාර්තාව</h2>
+                    <div class="report-header">
+                        <div>
+                            <p><strong>දිනය:</strong> ${new Date().toLocaleDateString()}</p>
+                        </div>
+                        <div class="score-display">
+                            මුළු ලකුණු: ${totalScore}/100 (${totalPercentage.toFixed(1)}%)
+                        </div>
+                    </div>
+                    
+                    <div class="report-section">
+                        <h3>1. දරුවා පිළිබඳ මාපිය අධීක්ෂණය</h3>
+                        <p>ලකුණු: ${studentScore}/50 (${studentPercentage.toFixed(1)}%)</p>
+                        <div class="progressbar">
+                            <div class="progress" style="width: ${studentPercentage}%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="report-section">
+                        <h3>2. දෙමාපියන්ගේ දරුවා සම්බන්ධ උනන්දුව</h3>
+                        <p>ලකුණු: ${parentScore}/50 (${parentPercentage.toFixed(1)}%)</p>
+                        <div class="progressbar">
+                            <div class="progress" style="width: ${parentPercentage}%"></div>
+                        </div>
+                    </div>
+                `;
+                
+                // Add analysis based on scores
+                report += `<div class="report-section"><h3>විශ්ලේෂණය:</h3>`;
+                
+                // Student assessment analysis
+                if (studentScore >= 40) {
+                    report += `<p>ඔබේ දරුවා අධ්‍යාපනයේ ඉතා හොඳ මට්ටමක සිටින අතර, ඉහළ ස්වයං විනයක් සහ සැලසුම් සහගත අධ්‍යාපන චර්යාවන් පෙන්නුම් කරයි. මෙම මට්ටම පවත්වාගෙන යාම දිගටම අනුගමනය කරන්න.</p>`;
+                } else if (studentScore >= 25) {
+                    report += `<p>ඔබේ දරුවා අධ්‍යාපනයේ සාමාන්‍ය මට්ටමක සිටින අතර, යම් අධ්‍යාපන චර්යාවන් වැඩිදියුණු කිරීමට අවස්ථාව ඇත. දරුවාගේ අධ්‍යාපන ක්‍රමවේදයන් සහ ස්වයං විනය වැඩිදියුණු කිරීමට පියවර ගන්න.</p>`;
+                } else {
+                    report += `<p>ඔබේ දරුවාගේ අධ්‍යාපන ක්‍රියාවලියේ සැලකිය යුතු දුර්වලතා ඇත. ඔහුගේ/ඇයගේ අධ්‍යාපන රටාව, ස්වයං විනය සහ අධ්‍යාපන හැකියාවන් සම්බන්ධයෙන් වැඩි අවධානයක් යොමු කිරීම අවශ්‍යයි.</p>`;
+                }
+                
+                // Parent involvement analysis
+                if (parentScore >= 40) {
+                    report += `<p>ඔබ දරුවාගේ අධ්‍යාපනයේ ඉතා හොඳ සහභාගීත්වයක් පෙන්නුම් කරන අතර, නිරන්තර අධීක්ෂණය සහ සහාය ලබා දෙයි. මෙම සහයෝගය දිගටම පවත්වාගෙන යන්න.</p>`;
+                } else if (parentScore >= 25) {
+                    report += `<p>ඔබ දරුවාගේ අධ්‍යාපනයේ සාමාන්‍ය සහභාගීත්වයක් පෙන්නුම් කරන නමුත්, වැඩි සහයක් සහ අධීක්ෂණයක් ලබාදීමට අවස්ථාව ඇත. දරුවාගේ අධ්‍යාපන කටයුතුවලට වැඩි උනන්දුවක් දක්වන්න.</p>`;
+                } else {
+                    report += `<p>ඔබේ දරුවාගේ අධ්‍යාපනයට ඔබේ සහභාගීත්වය අවම මට්ටමක පවතී. දරුවාගේ අධ්‍යාපනයේ සාර්ථකත්වය සඳහා වැඩි අවධානයක් යොමු කර, දරුවාගේ අධ්‍යාපන ක්‍රියාවලියට වැඩි සහයක් ලබා දීම අත්‍යවශ්‍යයි.</p>`;
+                }
+                
+                // Overall analysis
+                if (totalScore >= 80) {
+                    report += `<p>සමස්තයක් ලෙස, ඔබේ දරුවාගේ අධ්‍යාපන තත්ත්වය ඉතා හොඳ මට්ටමක පවතී. දරුවාගේ අධ්‍යාපන ක්‍රියාවලිය සහ ඔබේ සහභාගීත්වය ඉහළ මට්ටමක පවතින අතර, මෙම රටාව දිගටම පවත්වාගෙන යාම වැදගත්ය.</p>`;
+                } else if (totalScore >= 50) {
+                    report += `<p>සමස්තයක් ලෙස, ඔබේ දරුවාගේ අධ්‍යාපන තත්ත්වය සාමාන්‍ය මට්ටමක පවතී. දරුවාගේ අධ්‍යාපන ක්‍රියාවලිය සහ ඔබේ සහභාගීත්වය තවදුරටත් වැඩිදියුණු කිරීමට අවස්ථා ඇත.</p>`;
+                } else {
+                    report += `<p>සමස්තයක් ලෙස, ඔබේ දරුවාගේ අධ්‍යාපන තත්ත්වය දුර්වල මට්ටමක පවතී. දරුවාගේ අධ්‍යාපන ක්‍රියාවලිය සහ ඔබේ සහභාගීත්වය සැලකිය යුතු ලෙස වැඩිදියුණු කිරීම අවශ්‍යයි.</p>`;
+                }
+                
+                // Additional recommendations
+                report += `<div class="recommendation">
+                    <h3>නිර්දේශ:</h3>
+                    <p>1. දරුවා සමඟ නිතිපතා අධ්‍යාපන ප්‍රගතිය පිළිබඳව සාකච්ඡා කරන්න.</p>
+                    <p>2. දරුවාගේ ඉගෙනුම් ශෛලියට ගැලපෙන අධ්‍යාපන උපකාරක සහ සම්පත් සොයා දෙන්න.</p>
+                    <p>3. දරුවාට නිසි අධ්‍යාපන පරිසරයක් නිවසේ සකස් කර දෙන්න.</p>
+                    <p>4. දරුවාගේ ගුරුවරුන් සමඟ නිතිපතා සන්නිවේදනය කරන්න.</p>
+                    <p>5. දරුවාගේ අධ්‍යාපන ප්‍රගතිය සටහන් කරගෙන යන්න.</p>
+                    <p>6. දරුවාගේ විශේෂ හැකියාවන් හඳුනාගෙන ඒවා දියුණු කිරීමට අවස්ථා සලසන්න.</p>
+                    <p>7. දරුවාට අධ්‍යාපන ඉලක්ක සකස් කර ගැනීමට උදව් කරන්න.</p>
+                    <p>8. දරුවාගේ කාල කළමනාකරණයට උපදෙස් දෙන්න.</p>
+                    <p>9. දරුවාගේ අධ්‍යාපන ගැටළු විසඳීමට සක්‍රියව මැදිහත් වන්න.</p>
+                    <p>10. දරුවා සමඟ අනාගත වෘත්තීය මාර්ග පිළිබඳව සාකච්ඡා කරන්න.</p>
+                </div>`;
+                
+                report += `</div>`;
+                
+                // Display report
+                reportDiv.innerHTML = report;
+                reportDiv.style.display = 'block';
+                copyReportButton.style.display = 'inline-block';
+            });
+            
+            // Copy report button click event
+            copyReportButton.addEventListener('click', function() {
+                const reportText = reportDiv.innerText;
+                navigator.clipboard.writeText(reportText)
+                    .then(() => {
+                        alert('වාර්තාව පිටපත් කරන ලදී!');
+                    })
+                    .catch(err => {
+                        console.error('වාර්තාව පිටපත් කිරීමේ දෝෂයක්:', err);
+                        alert('වාර්තාව පිටපත් කිරීමට නොහැකි විය. අත්‍යාවශ්‍ය කොටස් තෝරාගෙන පිටපත් කරන්න.');
+                    });
+            });
+        });
+    </script>
+</body>
+</html>
